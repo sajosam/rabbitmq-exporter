@@ -1,4 +1,4 @@
-module bitbucket.org/exporter
+module github.com/sajosam/rabbitmq-exporter
 
 go 1.22.5
 

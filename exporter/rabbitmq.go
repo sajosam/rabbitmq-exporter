@@ -3,11 +3,8 @@ package exporter
 import (
 	"context"
 	"encoding/json"
-	"fmt"
-	"os"
 	"time"
 
-	"github.com/k0kubun/pp"
 	amqp "github.com/rabbitmq/amqp091-go"
 	log "github.com/sirupsen/logrus"
 )
@@ -19,13 +16,13 @@ func failOnError(err error, msg string) {
 }
 
 func (s *Exporter) RabbitMQExport(body []interface{}, routingKey string) {
-	port := os.Getenv("port")
-	host := os.Getenv("host")
-	usrname := os.Getenv("username")
-	passwd := os.Getenv("password")
-	conn_string := fmt.Sprintf("amqp://%s:%s@%s:%s", usrname, passwd, host, port)
-	pp.Println(conn_string)
-	conn, err := amqp.Dial(conn_string)
+	// port := os.Getenv("port")
+	// host := os.Getenv("host")
+	// usrname := os.Getenv("username")
+	// passwd := os.Getenv("password")
+	// // conn_string := fmt.Sprintf("amqp://%s:%s@%s:%s", usrname, passwd, host, port)
+	// pp.Println(conn_string)
+	conn, err := amqp.Dial("amqp://onepane:onepane@139.59.58.203:5672")
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer conn.Close()
 

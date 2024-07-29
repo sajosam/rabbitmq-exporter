@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bitbucket.org/exporter/exporter"
+	"github.com/sajosam/rabbitmq-exporter/exporter"
 )
 
 func main() {
@@ -9,7 +9,7 @@ func main() {
 		"export": map[string]interface{}{
 			"kind":    "rabbitmq",
 			"key":     "rabbit",
-			"topic":   "op-org-14",
+			"topic":   "op-org-14-events",
 			"host":    "localhost",
 			"port":    "6650",
 			"enabled": true,
