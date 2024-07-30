@@ -45,22 +45,25 @@ func (s *Exporter) RabbitMQExport(body []interface{}, routingKey string, props m
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	bodyBytes, err := json.Marshal(body)
-	failOnError(err, "Failed to marshal body to JSON")
+	for _, event := range body {
 
-	err = ch.PublishWithContext(ctx,
-		"op-org",   // exchange
-		routingKey, // routing key
-		false,      // mandatory
-		false,      // immediate
-		amqp.Publishing{
-			ContentType: "application/json",
-			Body:        bodyBytes,
-			Headers:     headers,
-		})
-	failOnError(err, "Failed to publish a message")
+		bodyBytes, _ := json.Marshal(event)
 
-	log.Printf(" [x] Sent %s: %s", routingKey, bodyBytes)
+		err = ch.PublishWithContext(ctx,
+			"op-org",   // exchange
+			routingKey, // routing key
+			false,      // mandatory
+			false,      // immediate
+			amqp.Publishing{
+				ContentType: "application/json",
+				Body:        bodyBytes,
+				Headers:     headers,
+			})
+		failOnError(err, "Failed to publish a message")
+
+		log.Printf(" [x] Sent %s: %s", routingKey, bodyBytes)
+	}
+
 }
 
 func mapToTable(properties map[string]string) amqp.Table {

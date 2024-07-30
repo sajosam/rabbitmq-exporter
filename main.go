@@ -9,7 +9,7 @@ func main() {
 		"export": map[string]interface{}{
 			"kind":     "rabbitmq",
 			"key":      "rabbit",
-			"topic":    "op-org-14",
+			"topic":    "events-14",
 			"host":     "139.59.58.203",
 			"port":     "5672",
 			"enabled":  true,
@@ -19,7 +19,7 @@ func main() {
 	})
 
 	message := map[string]interface{}{
-		"event_id":      "27879",
+		"event_id":      "272879",
 		"event_message": "demo-2 Triggered from refs/heads/main",
 		"event_time":    1717397708000,
 		"tags": map[string]interface{}{
