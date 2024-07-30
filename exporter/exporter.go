@@ -28,7 +28,7 @@ func (s *Exporter) Export(messages []interface{}, props map[string]string) {
 		log.Info("Exporter enabled => " + s.Kind)
 		switch s.Kind {
 		case "rabbitmq":
-			s.RabbitMQExport(messages, s.Topic)
+			s.RabbitMQExport(messages, s.Topic, props)
 		default:
 			pp.Println("No information available for this exporter")
 		}

@@ -7,12 +7,14 @@ import (
 func main() {
 	exp := exporter.New(map[string]interface{}{
 		"export": map[string]interface{}{
-			"kind":    "rabbitmq",
-			"key":     "rabbit",
-			"topic":   "op-org-14-events",
-			"host":    "localhost",
-			"port":    "6650",
-			"enabled": true,
+			"kind":     "rabbitmq",
+			"key":      "rabbit",
+			"topic":    "op-org-14",
+			"host":     "139.59.58.203",
+			"port":     "5672",
+			"enabled":  true,
+			"password": "onepane",
+			"username": "onepane",
 		},
 	})
 
