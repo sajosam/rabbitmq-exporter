@@ -29,7 +29,7 @@ func (s *Exporter) RabbitMQExport(body []interface{}, routingKey string, props m
 	defer ch.Close()
 
 	headers := mapToTable(props)
-	headers["key"] = s.Kind
+	headers["key"] = s.Key
 
 	err = ch.ExchangeDeclare(
 		"op-org", // name
@@ -65,8 +65,14 @@ func (s *Exporter) RabbitMQExport(body []interface{}, routingKey string, props m
 
 func mapToTable(properties map[string]string) amqp.Table {
 	table := amqp.Table{}
+
+	propsMap := amqp.Table{}
+
 	for key, value := range properties {
-		table[key] = value
+		propsMap[key] = value
 	}
+
+	table["props"] = propsMap
+
 	return table
 }
